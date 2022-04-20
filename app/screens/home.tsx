@@ -9,8 +9,10 @@ import { Button, Input, Layout, Text } from '@ui-kitten/components'
 import React from 'react'
 import { HomeProps } from '../navigation/root-navigator'
 import Logo from '../assets/tmp.svg'
+import TPC from '../assets/tpc.svg'
 import useStoredInput from '../utils/useStoredInput'
 import { theme } from '../App'
+import useKeyboardVisible from '../utils/useKeyboardVisible'
 
 const styles = StyleSheet.create({
   button: {
@@ -34,11 +36,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerContainer: {
-    marginVertical: 10,
+    paddingVertical: 10,
+    width: '100%',
   },
   footerText: {
     textAlign: 'center',
     fontSize: 12,
+  },
+  footerLogo: {
+    width: '100%',
+    height: 20,
+    marginTop: 5,
+    marginBottom: 20,
   },
   footerMail: {
     textAlign: 'center',
@@ -49,6 +58,7 @@ const styles = StyleSheet.create({
 })
 
 const HomeScreen: React.FC<HomeProps> = ({ navigation }) => {
+  const isKeyboardVisible = useKeyboardVisible()
   const [name, nameProps] = useStoredInput('name')
   const [link, linkProps] = useStoredInput('link')
 
@@ -67,7 +77,7 @@ const HomeScreen: React.FC<HomeProps> = ({ navigation }) => {
         <Text style={styles.logoSubtitle}>
           L'équipement de la route maîtrisée
         </Text>
-        <View style={styles.inputContainer}>
+        <Layout style={styles.inputContainer}>
           <Input label="Nom" {...nameProps} style={styles.input} />
           <Input label="Lien (optionnel)" {...linkProps} style={styles.input} />
           <Button
@@ -76,15 +86,23 @@ const HomeScreen: React.FC<HomeProps> = ({ navigation }) => {
             disabled={!name}>
             Commencer
           </Button>
-        </View>
-        <View style={styles.footerContainer}>
+        </Layout>
+        <Layout />
+        <Layout
+          level="2"
+          style={{
+            ...styles.footerContainer,
+            display: isKeyboardVisible ? 'none' : undefined,
+          }}>
+          <Text style={styles.footerText}>Une application proposé par</Text>
+          <TPC style={styles.footerLogo} />
           <Text style={styles.footerText}>Une question ? Un problème ?</Text>
           <RNText
             style={styles.footerMail}
             onPress={() => Linking.openURL('mailto:contact@tpc-toulouse.fr')}>
             contact@tpc-toulouse.fr
           </RNText>
-        </View>
+        </Layout>
       </Layout>
     </SafeAreaView>
   )

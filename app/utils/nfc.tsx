@@ -3,7 +3,6 @@ import NfcManager, { Ndef, NdefRecord, NfcTech } from 'react-native-nfc-manager'
 import useLocation from './useLocation'
 import moment from 'moment'
 import 'moment/min/locales'
-var ndef = require('@taptrack/ndef')
 
 //! this code is not self explanatory, nor is it easy to understand, so i recommend you read the NTAG spec, which can be found in the readme
 
@@ -164,13 +163,12 @@ interface MessageParameters {
 }
 
 function createMessage({ name, link, location }: MessageParameters): number[] {
-  const localeDateString = moment().locale('fr').format('HH:mm DD/MM/YY')
+  const localeDateString = moment().locale('fr').format('DD/MM/YY à HH:mm')
 
   const records: NdefRecord[] = []
 
-  records.push(Ndef.textRecord(name))
+  records.push(Ndef.textRecord(`Installé par ${name} le ${localeDateString}`))
   link && records.push(Ndef.uriRecord(link))
-  records.push(Ndef.textRecord(localeDateString))
   records.push(Ndef.uriRecord(`geo:${location?.lat},${location?.lng}`))
 
   return Ndef.encodeMessage(records)
