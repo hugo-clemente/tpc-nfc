@@ -1,6 +1,6 @@
 import { light } from '@eva-design/eva'
 
-export const lightTheme = {
+export const tpcTheme = {
   ...light,
 
   'color-primary-100': '#F9D5EB',

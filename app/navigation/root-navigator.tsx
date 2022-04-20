@@ -9,7 +9,7 @@ import WriteScreen from '../screens/write'
 
 export type RootParamList = {
   Home: undefined
-  Write: { name: string; link: string }
+  Write: { name: string; link?: string }
 }
 
 export type HomeProps = NativeStackScreenProps<RootParamList, 'Home'>
@@ -25,7 +25,13 @@ function RootStack() {
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Write" component={WriteScreen} />
+      <Stack.Screen
+        name="Write"
+        component={WriteScreen}
+        options={{
+          headerTitle: 'NFC',
+        }}
+      />
     </Stack.Navigator>
   )
 }

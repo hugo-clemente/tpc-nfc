@@ -17,6 +17,7 @@ export default () => {
   const [location, setLocation] = useState<
     { lat: number; lng: number } | undefined
   >(undefined)
+  const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
     let watchId: number | undefined
@@ -26,6 +27,7 @@ export default () => {
         // await requestPermission()
         watchId = Geolocation.watchPosition(
           position => {
+            setInitialized(true)
             setLocation({
               lat: position.coords.latitude,
               lng: position.coords.longitude,
@@ -58,5 +60,5 @@ export default () => {
     }
   }, [])
 
-  return location
+  return { location, initialized }
 }
