@@ -169,7 +169,11 @@ function createMessage({ name, link, location }: MessageParameters): number[] {
 
   records.push(Ndef.textRecord(`Installé par ${name} le ${localeDateString}`))
   link && records.push(Ndef.uriRecord(link))
-  records.push(Ndef.uriRecord(`geo:${location?.lat},${location?.lng}`))
+  records.push(
+    Ndef.uriRecord(
+      `geo:${location?.lat},${location?.lng}?q=${location?.lat},${location?.lng}`,
+    ),
+  )
 
   return Ndef.encodeMessage(records)
 }
