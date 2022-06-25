@@ -7,7 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { StatusBar } from 'react-native'
 import { tmpTheme } from './theme/tmp'
 
-export const theme = tmpTheme
+export const theme = tpcTheme
 
 export default () => (
   <ApplicationProvider {...eva} theme={theme}>

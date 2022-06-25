@@ -8,7 +8,7 @@ import {
 import { Button, Input, Layout, Text } from '@ui-kitten/components'
 import React from 'react'
 import { HomeProps } from '../navigation/root-navigator'
-import Logo from '../assets/tmp.svg'
+import Logo from '../assets/tpc-full.svg'
 import TPC from '../assets/tpc.svg'
 import useStoredInput from '../utils/useStoredInput'
 import { theme } from '../App'
